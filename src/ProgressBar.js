@@ -28,6 +28,12 @@ export default class ProgressBar extends Component {
 
 	componentDidMount() {
 		this.animate();
+		if (this.props.progress > 0 && this.props.size > 0) {
+			setTimeout(() => {
+				const sizeWidthRatio = this.props.size / this.props.width;
+				this.state.width.setValue(this.props.progress / sizeWidthRatio);
+			}, 500) 
+		}
 	}
 
 	componentWillReceiveProps(props) {
