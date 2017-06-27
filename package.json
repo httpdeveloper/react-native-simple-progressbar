@@ -1,0 +1,28 @@
+{
+  "name": "react-native-simple-progressbar",
+  "version": "0.0.1",
+  "description": "A simple, lightweight and full customizable progress bar for React Native",
+  "license": "MIT",
+  "main": "index.js",
+   "keywords": [
+    "react-native",
+    "react-native-simple-progressbar",
+    "react",
+    "progress",
+    "progressbar",
+    "progress-bar"
+  ],
+  "author": {
+    "name": "Dinesh Maharjan",
+    "email": "httpdeveloper@gmail.com",
+    "url": "https://github.com/httpdeveloper"
+  },
+  "bugs": {
+    "url": "https://github.com/httpdeveloper/react-native-simple-progressbar/issues"
+  },
+  "homepage": "https://github.com/httpdeveloper/react-native-simple-progressbar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/httpdeveloper/react-native-simple-progressbar"
+  }
+}
