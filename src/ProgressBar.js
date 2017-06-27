@@ -8,6 +8,7 @@ import {
 const styles = require('./style');
 
 const barMinWidthOffset = 20;	
+const maxFontSize = 15;
 const defaultProps = {
 		height: 12,
 		width: 200,
@@ -22,34 +23,28 @@ export default class ProgressBar extends Component {
 		this.state = {
 			width: new Animated.Value(0),
 			progress: 0,
-			percentageWidthRatio: 0,
-			sizeRatio: 0,
-			oldprogress: 0
 		};
 	}
 
 	componentDidMount() {
-		const percentageWidthRatio = 100 / this.props.width;
-		const sizeWidthRatio = this.props.size / this.props.width;
-
-		this.setState({ percentageWidthRatio, sizeWidthRatio });
 		this.animate();
 	}
 
 	componentWillReceiveProps(props) {
-		if (this.state.oldprogress !== props.progress) {
-			this.state.width.setValue(props.progress / this.state.sizeWidthRatio); 
-			this.setState({ oldprogress: props.progress });
+		if (this.props.progress !== props.progress) {
+			const sizeWidthRatio = props.size / props.width;
+			this.state.width.setValue(props.progress / sizeWidthRatio); 
 		}
 	}
 
 	animate() {
+		const percentageWidthRatio = 100 / this.props.width;
 		this.state.width.setValue(0);
 
 		this.state.width.addListener((progress) => {
-			const progressValue = parseInt(progress.value * this.state.percentageWidthRatio, 10);
+			const progressValue = parseInt(progress.value * percentageWidthRatio, 10);
 			this.setState({
-				progress: `${progressValue}%`
+				progress: progressValue
 			});
 			if (this.props.onProgress) {
 				this.props.onProgress(progressValue);
@@ -69,12 +64,14 @@ export default class ProgressBar extends Component {
 			children,
 			style,
 			textStyle,
-			hideProgressText
+			hideProgressText,
+			height
 		} = this.props;
 
 		if (!(size > 0)) return <View />;
 
-		const fontSize = (this.state.width._value <= barMinWidthOffset) ? (this.props.height / 4 ) : (this.props.height / 2);
+		let fontSize = (this.state.progress <= barMinWidthOffset) ? (height / 3) : (height / 2);
+		fontSize = (fontSize > maxFontSize) ? maxFontSize : fontSize;
 
 		return (
 		<View style={[styles.container, { width: this.props.width, height: this.props.height }, style]}>
@@ -85,7 +82,7 @@ export default class ProgressBar extends Component {
 					backgroundColor: (color ? color : '#f00') }]} 
 			>
 				{!children && !hideProgressText && 
-					<Text style={[styles.progressTxt, { fontSize }, textStyle]}>{this.state.progress}</Text>
+					<Text style={[styles.progressTxt, { fontSize }, textStyle]}>{this.state.progress}%</Text>
 				}
 			</Animated.View>
 			{children}
