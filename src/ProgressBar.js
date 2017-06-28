@@ -33,7 +33,7 @@ export default class ProgressBar extends Component {
 				const sizeWidthRatio = this.props.size / this.props.width;
 				const progress = (this.props.progress > this.props.size) ? this.props.size : this.props.progress;
 				this.state.width.setValue(progress / sizeWidthRatio);
-			}, 100) 
+			}, 100);
 		}
 	}
 
