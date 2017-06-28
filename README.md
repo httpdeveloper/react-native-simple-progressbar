@@ -59,7 +59,7 @@ import ProgressBar from 'react-native-simple-progressbar';
   />
 ```
 ## Screenshot
-![alt text](https://media.giphy.com/media/5EivywjHaPBkI/giphy.gif)
+![alt text](https://media.giphy.com/media/Z45MOkrqzZjNe/giphy.gif)
 
 ## Installation
 `npm install react-native-simple-progressbar@https://github.com/httpdeveloper/react-native-simple-progressbar.git --save`

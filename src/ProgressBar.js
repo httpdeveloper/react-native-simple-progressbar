@@ -31,15 +31,17 @@ export default class ProgressBar extends Component {
 		if (this.props.progress > 0 && this.props.size > 0) {
 			setTimeout(() => {
 				const sizeWidthRatio = this.props.size / this.props.width;
-				this.state.width.setValue(this.props.progress / sizeWidthRatio);
-			}, 500) 
+				const progress = (this.props.progress > this.props.size) ? this.props.size : this.props.progress;
+				this.state.width.setValue(progress / sizeWidthRatio);
+			}, 100) 
 		}
 	}
 
 	componentWillReceiveProps(props) {
 		if (this.props.progress !== props.progress) {
 			const sizeWidthRatio = props.size / props.width;
-			this.state.width.setValue(props.progress / sizeWidthRatio); 
+			const progress = (props.progress > props.size) ? props.size : props.progress;
+			this.state.width.setValue(progress / sizeWidthRatio); 
 		}
 	}
 
